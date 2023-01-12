@@ -13,11 +13,17 @@ app.get('/test', async(req, res) => {
     const client = new vision.ImageAnnotatorClient({ keyFilename: './credenciales-374423-09f1f26c3239.json' });
 
     // Performs label detection on the image file
-    const [result] = await client.labelDetection('/home/jorodriguez/Descargas/credencia1.jpeg');
+    /*const [result] = await client.labelDetection('/home/jorodriguez/Descargas/credencia1.jpeg');
     const labels = result.labelAnnotations;
     console.log('Labels:');
     labels.forEach(label => console.log(label.description));
-    res.status(200).json(labels);
+    */
+
+    const [result] = await client.textDetection('/home/jorodriguez/Descargas/credencia1.jpeg');
+    const detections = result.textAnnotations;
+    console.log('Text:');
+    detections.forEach(text => console.log(text));
+    res.status(200).json(detections);
 });
 
 
